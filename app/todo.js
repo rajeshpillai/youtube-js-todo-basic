@@ -135,36 +135,8 @@ var todoApp = {
             todoList.innerHTML = "No todos yet! Be awesome and create some todos!!";
             return;
         }
-
-        let btnText = "complete";
-        let bntUndoRedo = "";
-        let btnDelete = `
-            <button type='button' 
-                onclick='todoApp.removeTodo(this)' 
-                class='btn'>remove
-            </button>
-        `;
-
         for (let i = 0;i < state.todos.length; i++) {
-            let todo = state.todos[i];
-            let todoItemStyle = "";
-            let buttonUndoRedoText = "complete";
-
-            if (todo.status === true) {
-                todoItemStyle = "todo-completed";
-                buttonUndoRedoText = "undo";
-            }
-
-            // Use Backtick-> found near <esc> key on most keyboards
-            btnUndoRedo = `
-                <button type='button' onclick='todoApp.toggleTodos(this)' 
-                     class='btn'>${buttonUndoRedoText}</button>`;
-
-            html += `
-                <li id=${todo.id} class=${todoItemStyle}>
-                    ${state.todos[i].task}${btnUndoRedo}${btnDelete}
-                 </li>
-             `;
+            html += this.renderItem(state.todos[i]);
         }
         todoList.innerHTML = html;
     }
