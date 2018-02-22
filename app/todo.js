@@ -119,7 +119,13 @@ var todoApp = {
       console.log("update: ", event, todoId);
       if (event.which == 27) {  // escape key
         this.toggleEdit(event.target.parentNode, todoId);
-      }  
+      } else if (event.which == 13) { //enter key
+        let todo = this._findTodo(todoId);
+        todo.task = event.target.value; // todo: Mutating the state. Not a good practice.
+        this.toggleEdit(event.target.parentNode, todoId);
+      }
+
+      console.log(state.todos);
     },
 
     render: function () {
